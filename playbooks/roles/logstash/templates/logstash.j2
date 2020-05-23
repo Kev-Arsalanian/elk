@@ -1,0 +1,15 @@
+input {
+beats {
+  port => 5044
+  host => "127.0.0.1"
+}
+}
+
+output {
+elasticsearch { 
+  hosts => ["localhost:9200"] 
+  }
+  stdout { 
+    codec => rubydebug 
+  }
+}

@@ -1,0 +1,10 @@
+---
+# sudo ansible-playbook -i hosts/elastic.hosts playbooks/main.yml
+
+- hosts: elk_stack
+  remote_user: root
+  become: true
+  roles:
+     - role: elastic_stack
+     - role: logstash
+     - role: elasticsearch

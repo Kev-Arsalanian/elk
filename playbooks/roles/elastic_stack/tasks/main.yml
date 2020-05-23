@@ -1,0 +1,18 @@
+---
+
+- name: Adding Elastic PGP key
+  apt_key:
+    url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+    state: present
+
+- name: Installing apt transport https
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Adding ELK 7.x to the repository list
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+    update_cache: yes
+

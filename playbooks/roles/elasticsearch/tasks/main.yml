@@ -1,0 +1,27 @@
+---
+
+- name: Installing Elasticsearch from apt repository
+  apt:
+    name: elasticsearch
+    state: present
+    update_cache: yes
+
+#- name: Copying the Elasticsearch template to elasticsearch.yml
+#  template:
+#    src: elasticsearch.j2
+#    dest: /etc/elasticsearch/elasticsearch.yml
+
+- name: Reloading the systemd daemon
+  systemd:
+    daemon_reload: yes
+
+- name: Enabling elasticsearch.service
+  systemd:
+    name: elasticsearch.service
+    enabled: yes
+
+- name: Starting elasticsearch.service
+  systemd: 
+    name: elasticsearch.service
+    state: restarted
+  become: true

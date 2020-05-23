@@ -1,0 +1,27 @@
+---
+
+- name: Installing Logstash from apt repository
+  apt:
+    name: logstash
+    state: present
+    update_cache: yes
+
+- name: Copying the logstash template to logstash.yml
+  template: 
+    src: logstash.j2
+    dest: /etc/logstash/conf.d/logstash.conf
+
+- name: Reloading the systemd daemon
+  systemd:
+    daemon_reload: yes
+
+- name: Enabling logstash.service
+  systemd:
+    name: logstash.service
+    enabled: yes
+
+- name: Starting logstash.service
+  systemd:
+    name: logstash.service
+    state: restarted
+  become: true
