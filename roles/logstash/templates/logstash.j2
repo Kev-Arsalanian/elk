@@ -1,15 +1,11 @@
 input {
-beats {
-  port => 5044
-  host => "127.0.0.1"
-}
+  beats {
+    port => 5044
+  }
 }
 
 output {
-elasticsearch { 
-  hosts => ["localhost:9200"] 
-  }
-  stdout { 
-    codec => rubydebug 
-  }
+  elasticsearch { 
+    hosts => ["localhost:9200"] 
+    }
 }
