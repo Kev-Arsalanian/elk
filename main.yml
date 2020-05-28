@@ -1,5 +1,6 @@
 ---
-# sudo ansible-playbook -i hosts/elastic.hosts playbooks/main.yml
+# to run the playbook use the command below
+# ansible-playbook -i hosts/elastic.hosts -vvv main.yml
 
 - hosts: elk_stack
   remote_user: root
@@ -8,3 +9,17 @@
      - role: elastic_stack
      - role: logstash
      - role: elasticsearch
+
+- hosts: kibana
+  remote_user: root
+  become: true
+  roles:
+     - role: elastic_stack
+     - role: kibana
+
+- hosts: filebeat
+  remote_user: root
+  become: true
+  roles:
+     - role: elastic_stack
+     - role: filebeat
